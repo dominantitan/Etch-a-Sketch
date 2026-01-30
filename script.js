@@ -1,5 +1,8 @@
 const container = document.querySelector("#container");
 const sizebutton = document.querySelector("#sizebutton");
+const blackbutton = document.querySelector(".black");
+const randombutton = document.querySelector(".random");
+
 let size = 16;
 const containerWidth = 500;
 let gridboxWidth;
@@ -51,8 +54,52 @@ grid.forEach((item) => {
   });
 });
 
-grid.forEach((item) => {
+makeBlack(grid);
+
+function makeBlack(grid) {
+  grid.forEach((item) => {
+    item.addEventListener("mouseleave", () => {
+      item.style.backgroundColor = "black";
+    });
+  });
+}
+
+function makeRandom(grid){
+  grid.forEach((item) => {
   item.addEventListener("mouseleave", () => {
-    item.style.backgroundColor = "black";
+    item.style.backgroundColor = randomColor();
   });
 });
+}
+
+blackbutton.addEventListener("click",() => {
+  makeBlack(grid);
+})
+
+randombutton.addEventListener("click",() =>{
+  makeRandom(grid);
+})
+
+// grid.forEach((item) => {
+//   item.addEventListener("mouseleave", () => {
+//     item.style.backgroundColor = randomColor();
+//   });
+// });
+
+// grid.forEach((item) => {
+//   item.addEventListener("mouseleave", () => {
+//     item.style.backgroundColor = "black";
+//   });
+// });
+
+function randomColorNumber() {
+  let randomNumber = Math.floor(Math.random() * 256);
+  return randomNumber;
+}
+function randomColor() {
+  let r = randomColorNumber();
+  let g = randomColorNumber();
+  let b = randomColorNumber();
+
+  return `rgb(${r}, ${g}, ${b})`;
+}
